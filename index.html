@@ -2,20 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rokki — 2026 Growth Curriculum</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#e8394a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Rokki OS">
+<meta name="description" content="Rokki's 2026 music career operating system — releases, goals, revenue, and weekly rhythm.">
+<link rel="manifest" id="pwa-manifest">
+<title>Rokki OS — 2026 Growth Curriculum</title>
+<script>
+  // Generate and inject PWA manifest dynamically
+  const manifest = {
+    name: "Rokki OS",
+    short_name: "Rokki OS",
+    description: "Rokki's 2026 music career operating system",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#e8394a",
+    orientation: "portrait-primary",
+    icons: [
+      {
+        src: "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23e8394a'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='80' fill='white'>R</text></svg>`),
+        sizes: "192x192",
+        type: "image/svg+xml",
+        purpose: "any maskable"
+      },
+      {
+        src: "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23e8394a'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='220' fill='white'>R</text></svg>`),
+        sizes: "512x512",
+        type: "image/svg+xml",
+        purpose: "any maskable"
+      }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+  document.getElementById('pwa-manifest').href = URL.createObjectURL(blob);
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a26;
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --surface2: #ebebee;
     --accent: #e8394a;
     --accent2: #ff4d6d;
     --accent3: #7b5ea7;
-    --text: #f0f0f8;
+    --text: #0a0a0f;
     --muted: #6b6b88;
-    --border: rgba(255,255,255,0.07);
+    --border: rgba(0,0,0,0.09);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,17 +63,7 @@
     font-weight: 300;
     line-height: 1.6;
     overflow-x: hidden;
-  }
-
-  /* NOISE TEXTURE */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.4;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* HEADER */
@@ -56,7 +82,7 @@
     transform: translateY(-50%);
     font-family: 'Bebas Neue', sans-serif;
     font-size: 280px;
-    color: rgba(232,57,74,0.03);
+    color: rgba(232,57,74,0.05);
     pointer-events: none;
     letter-spacing: -10px;
     white-space: nowrap;
@@ -82,7 +108,8 @@
     margin-bottom: 24px;
   }
 
-  h1 span { color: var(--accent); }
+  h1 .red { color: var(--accent); }
+  h1 .black { color: #0a0a0f; }
 
   .subtitle {
     font-size: 16px;
@@ -586,13 +613,35 @@
 
   @media (max-width: 900px) {
     header { padding: 40px 24px 32px; }
+    header::after { font-size: 120px; }
     .stats { grid-template-columns: 1fr 1fr; }
-    .stat { padding: 24px; }
+    .stat { padding: 20px 24px; }
     main { grid-template-columns: 1fr; }
     aside { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-    .content { padding: 32px 24px; }
+    .content { padding: 24px 16px; }
     .skill-grid { grid-template-columns: 1fr; }
-    .nav-tabs { padding: 0 24px; }
+    .nav-tabs { padding: 0 16px; }
+    #tab-releases, #tab-goals, #tab-revenue, #tab-weekly, #tab-aistack, #tab-resources { padding: 24px 16px !important; }
+    .phase-title { font-size: 40px; }
+    h1 { font-size: clamp(48px, 14vw, 80px); }
+    .subtitle { font-size: 14px; }
+    .tab-btn { padding: 16px 14px; font-size: 10px; letter-spacing: 0.05em; }
+    .skill-card { padding: 20px; }
+    .tools-table { font-size: 12px; }
+    .tools-table td, .tools-table th { padding: 10px 10px; }
+    .stat-num { font-size: 36px; }
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 32px 16px 24px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 16px; }
+    .nav-tabs { padding: 0 8px; }
+    .tab-btn { padding: 14px 10px; font-size: 9px; }
+    .content { padding: 20px 14px; }
+    #tab-releases, #tab-goals, #tab-revenue, #tab-weekly, #tab-aistack, #tab-resources { padding: 20px 14px !important; }
+    .phase-title { font-size: 32px; }
+    .sidebar-section { padding: 0 20px; }
   }
 </style>
 </head>
@@ -600,7 +649,7 @@
 
 <header>
   <div class="tag">2026 Curriculum — Solo Artist OS · Started Mar 6</div>
-  <h1>Learn to <span>Scale</span><br>as Rokki</h1>
+  <h1><span class="red">ROKKI</span> <span class="black">OS</span></h1>
   <p class="subtitle">12 originals + 12 flips. 2 label deals. 10K followers. 100K streams. $4K/mo post-tax by Dec. $10K/mo post-tax by mid-2027. One person. Here's exactly how you get there — week by week.</p>
 </header>
 
@@ -633,7 +682,11 @@
   <button class="tab-btn" onclick="switchTab('resources', this)">Books & Courses</button>
 </div>
 
+<!-- TABS -->
+
 <main>
+  <!-- CURRICULUM TAB (sidebar + content) -->
+  <div id="tab-curriculum" style="display:contents;">
   <aside>
     <div class="sidebar-section">
       <div class="sidebar-label">Phases</div>
@@ -676,9 +729,7 @@
       </div>
     </div>
   </aside>
-
-  <!-- CURRICULUM TAB -->
-  <div id="tab-curriculum" class="content active">
+  <div id="tab-curriculum-content" class="content" style="display:block;">
 
     <!-- PHASE 1 -->
     <div id="phase-1" class="phase-content active">
@@ -725,4 +776,1956 @@
               <div class="detail-label" style="margin-bottom:10px;">Fri Mar 13 — Week 1 Deliverable</div>
               <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
                 <li>Notion workspace is live with all 5 pages created</li>
-             
+                <li>Analytics audit doc written — you know what's working</li>
+                <li>Content pillars defined and written down</li>
+                <li>Spotify for Artists dashboard reviewed, you understand your listener data</li>
+              </ul>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude this week:</strong> "I'm an independent artist named Rokki. Help me build a complete Notion workspace structure to run my music career as a solo business. I need pages for releases, content, finances, contacts, and weekly review. Tell me exactly what each page should contain."</div>
+          </div>
+        </div>
+
+        <!-- W2 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 2</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Mar 16 – Mar 21</div>
+            <div style="font-weight:500;font-size:14px;">Content System + Fan Funnel Infrastructure</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Content Calendar</div>
+                <ul class="task-list">
+                  <li>Build a 2-week content calendar template in Notion — map out what posts go on which days</li>
+                  <li>Plan your first full week of content: 3–5 posts across TikTok + Instagram, mapped to your pillars</li>
+                  <li>Do one "content batch" session: film 5–7 pieces of raw material in one sitting</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Fan Funnel Setup</div>
+                <ul class="task-list">
+                  <li>Set up Beacons.ai or Linktree — link to Instagram, TikTok, Spotify, + email signup</li>
+                  <li>Create a MailerLite or ConvertKit account — set up your first list</li>
+                  <li>Write a 3-email welcome sequence for new subscribers (use Claude)</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="detail-label" style="margin-bottom:10px;">Week 2 Deliverable</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>Content calendar template built in Notion</li>
+                <li>Bio link live with all platform links + email signup CTA</li>
+                <li>Email list set up, welcome sequence written and scheduled</li>
+                <li>First batch of content filmed, at least 2 posts published</li>
+              </ul>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude this week:</strong> "Write a 3-email welcome sequence for fans who sign up to my email list. I'm Rokki, I make [genre] music. My vibe is [describe]. Email 1: welcome + what to expect. Email 2: give them something (a story, exclusive, or free track). Email 3: call to action to stream or follow."</div>
+            <div style="margin-top:10px;padding:12px 16px;background:rgba(232,57,74,0.04);border:1px solid rgba(232,57,74,0.1);font-size:12px;color:var(--muted);">
+              <strong style="color:var(--text);">📖 Selling skill — start here:</strong> This week is your first real copywriting task. Before writing any emails, read the first 3 chapters of <em>Building a StoryBrand</em> by Donald Miller (free summary on YouTube). The core idea: your fan is the hero, you're the guide. Every email, caption, and offer should speak to what they want — not what you want to sell. This reframe changes everything.
+            </div>
+          </div>
+        </div>
+
+        <!-- W3 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 3</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Mar 23 – Mar 28</div>
+            <div style="font-weight:500;font-size:14px;">🎵 Mar 27 — Original #1 Release Week</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="background:rgba(232,57,74,0.05);border:1px solid rgba(232,57,74,0.15);padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--muted);">
+              <strong style="color:var(--accent);">⚡ Release Day: Thursday Mar 27</strong> — This is your first real release with a full campaign behind it. The systems you built in Weeks 1–2 get activated now.
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Mon–Wed Mar 23–26 — Pre-Release Push</div>
+                <ul class="task-list">
+                  <li>Confirm your pre-save link is live and has been shared across all platforms + email list</li>
+                  <li>Post 2–3 teaser pieces this week: snippet clip, behind-the-scenes, countdown content</li>
+                  <li>Confirm Spotify editorial pitch was submitted at least 7 days ago (should've gone in ~Mar 16 latest)</li>
+                  <li>Send final playlist pitch wave to 10 curators with the pre-save link</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Thu Mar 27 — Release Day Actions</div>
+                <ul class="task-list">
+                  <li>Post across all platforms: announcement post, the track, your personal story behind it</li>
+                  <li>Send email to your list — even if it's small, they're your most valuable audience</li>
+                  <li>Share in Stories every day through Apr 3 — keep it visible for 7 days minimum</li>
+                  <li>Engage every comment within 1 hour — release-day engagement velocity matters to the algorithm</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="detail-label" style="margin-bottom:10px;">Fri Mar 28 — Day-After Tasks</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>Post a "reaction" or "making of" to sustain momentum past day 1</li>
+                <li>DM every new follower you gained today — convert to email subscribers</li>
+                <li>Start researching your April 10 flip: which song will you rework?</li>
+                <li>Note what worked and what didn't — you'll debrief this fully next week</li>
+              </ul>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude this week:</strong> "Write 5 release-day social posts for my track [song name]. I need: 1 Instagram caption, 1 TikTok hook script, 1 email subject line + body, 1 Story CTA, and 1 post-release 'keeping it alive' caption for 3 days after. Make them feel like a person wrote them."</div>
+          </div>
+        </div>
+
+        <!-- W4 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 4</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Mar 30 – Apr 4</div>
+            <div style="font-weight:500;font-size:14px;">Release Debrief + Flip #1 Campaign Starts</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Mar 30 — Original #1 Debrief</div>
+                <ul class="task-list">
+                  <li>Pull all release data: streams, Spotify saves, playlist adds, follower gain, email signups, link-in-bio clicks</li>
+                  <li>Write a 1-page release debrief in Notion — what worked, what you'd do differently, what surprised you</li>
+                  <li>Identify: which platform drove the most discovery? Which content type drove streams? This informs everything forward</li>
+                  <li>Keep promoting the Mar 27 track this week — streams compound over the first 30 days</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Flip #1 Prep — Releases Apr 10</div>
+                <ul class="task-list">
+                  <li>Your flip should already be done or near done — finalise the track this week</li>
+                  <li>Submit to DistroKid by Apr 3 at the latest for Apr 10 release</li>
+                  <li>Submit Spotify editorial pitch immediately — even for a flip, pitch it</li>
+                  <li>Plan flip campaign: flips get a lighter campaign than originals — 2–3 teaser posts, release post, 1 follow-up</li>
+                </ul>
+              </div>
+            </div>
+            <div style="background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.2);padding:12px 16px;margin-top:16px;font-size:12px;color:var(--muted);">
+              <strong style="color:#ff9aad;">🔀 Flip Strategy:</strong> Flips (remixes/reworks of existing songs) serve a different purpose than originals. Their job is discovery — riding the search traffic of an already-known song to pull new listeners into your world. Pick songs trending in your genre. Bring your sound to it, don't just recreate it. Post a TikTok of it before it's out to gauge interest.
+            </div>
+          </div>
+        </div>
+
+        <!-- W5 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 5</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Apr 6 – Apr 11</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Apr 10 — Flip #1 Release + Original #2 Pre-Campaign Starts</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Apr 10 — Flip Release</div>
+                <ul class="task-list">
+                  <li>Release day posts: TikTok video using the flip, Instagram announcement, Stories</li>
+                  <li>Lean into the original song's audience — use the original track's name in your caption/tags to capture that search traffic</li>
+                  <li>Email your list: short note, here's the flip, here's why you made it</li>
+                  <li>Track: do flip listeners follow through to your original tracks on Spotify?</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Apr 24 Original — Campaign Starts Now</div>
+                <ul class="task-list">
+                  <li>Submit Apr 24 original to DistroKid immediately if not done — distribution takes 24–72hrs</li>
+                  <li>Submit Spotify editorial pitch this week — must be in by Apr 17 at the latest</li>
+                  <li>Set up pre-save link (Hypeddit or DistroKid) and start sharing now</li>
+                  <li>Research 20 new playlist curators for this track — genre/mood may differ from Mar 27 track</li>
+                </ul>
+              </div>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude this week:</strong> "Write a Spotify editorial pitch for my track [name]. Genre: [X], Mood: [Y], BPM: [Z], Influences: [A, B]. Tell the story of the track in 2–3 sentences. Keep it under 200 words, conversational, not press-release-y."</div>
+          </div>
+        </div>
+
+        <!-- W6 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 6</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Apr 13 – Apr 18</div>
+            <div style="font-weight:500;font-size:14px;">Original #2 Pre-Release Build + Label Research Begins</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Apr 24 Campaign — Final Prep</div>
+                <ul class="task-list">
+                  <li>Send all 20 playlist pitches this week using Claude-generated personalised emails</li>
+                  <li>Post 2–3 teasers: snippet, behind-the-scenes, "dropping Apr 24" countdown</li>
+                  <li>Email list: pre-save announcement with personal story about the track</li>
+                  <li>DM 5–10 creators with a clip: "would you use this in a video?"</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Label Research — Start Now</div>
+                <ul class="task-list">
+                  <li>Spend 2 hours researching labels in your market — who's signing artists at your level and genre?</li>
+                  <li>Build a Notion "Label Targets" page: 20 labels, A&R contact, recent signings, submission method</li>
+                  <li>Follow the A&R contacts on social — engage genuinely before you pitch. Start warm, not cold.</li>
+                  <li>Read: "All You Need to Know About the Music Business" — start now, 20 pages/day</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- W7 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Week 7</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Apr 21 – Apr 25</div>
+            <div style="font-weight:500;font-size:14px;">🎵 Apr 24 — Original #2 Release Week</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Thu Apr 24 — Release Day</div>
+                <ul class="task-list">
+                  <li>All platforms: announcement post, track link, your story behind it</li>
+                  <li>Email blast to your list — by now it should be bigger than Mar 27</li>
+                  <li>Stories every day through May 1</li>
+                  <li>Respond to every comment within 1 hour</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Compare vs. Original #1</div>
+                <ul class="task-list">
+                  <li>Compare release-week numbers against March 27 — are streams up? More playlist adds? Bigger social spike?</li>
+                  <li>Which campaign tactics worked better this time vs. last time?</li>
+                  <li>Note your running total: you should be on track for ~8–10K streams by end of April across both releases</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- W8–9 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 8–9</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Apr 27 – May 9</div>
+            <div style="font-weight:500;font-size:14px;">Debrief + Flip #2 + May Original Prep Starts</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Apr 28 — Apr 24 Track Debrief</div>
+                <ul class="task-list">
+                  <li>Pull all metrics: streams, saves, followers gained, playlist adds, email growth</li>
+                  <li>Running total check: you should be heading toward 15–20K streams across 2 originals + 1 flip by May</li>
+                  <li>Add debrief to Notion — your release playbook is getting sharper with each cycle</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Flip #2 — Targets ~May 8</div>
+                <ul class="task-list">
+                  <li>Flip #2 should release roughly midpoint between Apr 24 and May ~22 original</li>
+                  <li>Submit May 8 (or nearby) for distribution by end of this week</li>
+                  <li>Keep flip campaigns lean: TikTok video first to test, then release, 2–3 social posts, email mention</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:12px;">
+              <div class="detail-label" style="margin-bottom:10px;">Creator Outreach — Scale Up</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>Find 20 more TikTok creators (5k–100k) in your niche — add to Notion CRM</li>
+                <li>Send 10 personalised DMs with clips from your best-performing release so far</li>
+                <li>Track which creators drove actual Spotify streams using Hypeddit smart links</li>
+                <li>Start building your Tier 1 list: creators who used your music and drove results</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- W10–13 -->
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 10–13</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">May 11 – May 29</div>
+            <div style="font-weight:500;font-size:14px;">🎵 May ~22 Original + Systems Refinement + Label Outreach Wave 1</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">May Original — Full Campaign</div>
+                <ul class="task-list">
+                  <li>May original releases ~May 22 — run your full playbook: pre-save, editorial pitch, 20 curators, creator outreach</li>
+                  <li>By now you have 2 debriefs worth of data — this campaign should feel faster and sharper</li>
+                  <li>Pitch Apple Music editorial alongside Spotify — diversify your DSP relationships</li>
+                  <li>Automate scheduling: set up Buffer so you're not manually posting every day</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Label Outreach Wave 1</div>
+                <ul class="task-list">
+                  <li>By May 29 you'll have 3 originals + 2 flips released — that's a real catalog and real data</li>
+                  <li>Build your artist deck: 1-page PDF with your streaming numbers, social stats, and best track</li>
+                  <li>Send outreach to your first 5 label targets — the ones you've already been warming up on social</li>
+                  <li>Goal for Phase 1 exit: at least 1 label has responded or shown interest</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="detail-label" style="margin-bottom:10px;">Phase 1 Exit Checklist — Complete by May 29</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>✅ Notion OS fully built and in active use</li>
+                <li>✅ 3 originals released (Mar 27, Apr 24, May ~22)</li>
+                <li>✅ 2 flips released (Apr 10, May ~8)</li>
+                <li>✅ ~25–35K cumulative streams (pace to hit 100K by Dec)</li>
+                <li>✅ 50+ email subscribers</li>
+                <li>✅ 20+ playlist pitches sent, Tier 1 list forming</li>
+                <li>✅ Creator CRM with 30+ contacts</li>
+                <li>✅ Artist deck built, 5 label outreach emails sent</li>
+                <li>✅ Instagram + TikTok growing — target 1,500–2,500 followers each by June</li>
+              </ul>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude for your artist deck:</strong> "Help me write a 1-page artist pitch for Rokki to send to labels. Here are my stats as of [date]: [paste your Spotify monthly listeners, follower counts, best-performing track streams, playlist placements]. My sound is [describe]. My goals are 2 label deals in 2026. Write it in 300 words max — compelling, not corporate."</div>
+          </div>
+        </div>
+
+      </div><!-- end week grid -->
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;">
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">📣</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-hands">Deep Dive</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Social Media Content System</div>
+          <div class="card-summary">Full breakdown of content pillars, batching, and the weekly posting system you'll run across Phase 1.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">The 4 Content Pillars</div>
+              <ul class="task-list">
+                <li><strong style="color:var(--text)">Behind the Music</strong> — process videos, studio moments, how a track came together</li>
+                <li><strong style="color:var(--text)">Personality</strong> — who Rokki actually is. Opinions, humour, takes, life</li>
+                <li><strong style="color:var(--text)">Music-Forward</strong> — snippets, lyric reveals, release announcements</li>
+                <li><strong style="color:var(--text)">Community</strong> — fan responses, reshares, Q&As, "what do you think of this?"</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Batching Process (Tuesday each week)</div>
+              <ul class="task-list">
+                <li>Set 90 minutes aside — no phone distractions, phone is the camera</li>
+                <li>Film 5–8 pieces of raw material across your 4 pillars</li>
+                <li>Edit on CapCut — add captions, trim, use trending sounds where relevant</li>
+                <li>Write all captions with Claude in one session — paste raw ideas, get polished captions back</li>
+                <li>Schedule for the week in Buffer — done, no daily scramble</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Resources</div>
+              <span class="resource-pill"><span class="rtype">Book</span> Jab, Jab, Jab, Right Hook — Gary Vaynerchuk</span>
+              <span class="resource-pill"><span class="rtype">Free</span> Meta Creator Academy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">⚙️</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-ai">AI-Powered</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Business OS — Full Setup Guide</div>
+          <div class="card-summary">What your Notion workspace should contain, how to run your weekly CEO review, and what to track.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">Your 5 Notion Pages</div>
+              <ul class="task-list">
+                <li><strong style="color:var(--text)">Releases</strong> — every track: status, release date, campaign checklist, results</li>
+                <li><strong style="color:var(--text)">Content Calendar</strong> — 2-week rolling calendar, content ideas backlog</li>
+                <li><strong style="color:var(--text)">Finances</strong> — monthly income by stream, expenses, goals vs. actuals</li>
+                <li><strong style="color:var(--text)">Contacts</strong> — labels, curators, creators, blogs. Status + last contact date</li>
+                <li><strong style="color:var(--text)">Weekly Review</strong> — every Sunday: wins, blockers, next week's priority</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Sunday CEO Review (30 min)</div>
+              <ul class="task-list">
+                <li>What shipped this week? What was supposed to ship but didn't?</li>
+                <li>What's the #1 priority next week — if I only did one thing, what would it be?</li>
+                <li>Any relationships to follow up on? Any outreach that went cold?</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Resources</div>
+              <span class="resource-pill"><span class="rtype">Book</span> Built to Sell — John Warrillow</span>
+              <span class="resource-pill"><span class="rtype">Free</span> Notion musician templates (search Notion gallery)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PHASE 2 -->
+    <div id="phase-2" class="phase-content" style="display:none">
+      <div class="phase-header">
+        <div class="phase-period">Jun 1 – Sep 4, 2026 · 14 Weeks</div>
+        <div class="phase-title">Momentum</div>
+        <p class="phase-desc">You have data, a growing catalog, and your systems are running. Now you execute with speed and precision. This phase: 4 more originals, 4 more flips, 50 playlist curators pitched, and your first label conversation. The cadence is locked in — you're just getting better at running it.</p>
+      </div>
+
+      <div style="margin-bottom:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);">
+        <div class="detail-label" style="margin-bottom:10px;">Phase 2 Release Schedule</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Jun 19</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Jul 3</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Jul 17</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Jul 31</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Aug 14</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Aug 28</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Sep 4 (transition)</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.2);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#b89fd4;text-transform:uppercase;margin-bottom:4px;">🏷️ Goal</div>
+            <div style="font-size:11px;font-weight:500;color:var(--muted);">Label #1 by Sep</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:48px;">
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 1–2</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Jun 1 – Jun 13</div>
+            <div style="font-weight:500;font-size:14px;">🎵 Jun ~5 Original Midmonth Prep + Playlist Machine Builds</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Jun Original — Pre-Campaign</div>
+                <ul class="task-list">
+                  <li>Jun original should be submitted to DistroKid no later than Jun 12 for a ~Jun 19 release</li>
+                  <li>Spotify editorial pitch submitted immediately on upload</li>
+                  <li>Pre-save link live and pushed to all platforms + email list by Jun 12</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Playlist Machine — 50 Curators</div>
+                <ul class="task-list">
+                  <li>Research 50 independent curators in your genre across SubmitHub, Groover, PlaylistPush</li>
+                  <li>Build full Notion CRM: playlist name, followers, genre fit score, submission platform, contact</li>
+                  <li>Use Claude to batch-generate 50 personalised pitches from your template in one session</li>
+                </ul>
+              </div>
+            </div>
+            <div class="claude-box" style="margin-top:16px;"><strong>Ask Claude:</strong> "I have a list of 50 Spotify playlists I want to pitch my track to. Here's my pitch template: [paste]. Here are the 50 playlists with their genre/vibe: [paste]. Generate a personalised version of my pitch for each one. Keep each under 120 words."</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 3–4</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Jun 16 – Jun 27</div>
+            <div style="font-weight:500;font-size:14px;">🎵 Jun 19 Original Releases + 50 Curator Pitches Go Out</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Jun 19 — Release Day</div>
+                <ul class="task-list">
+                  <li>Full release campaign: all platforms, email blast, Stories every day for 7 days</li>
+                  <li>Activate your creator CRM — DM your Tier 1 creators with the track</li>
+                  <li>Submit remaining playlist pitches this week — stagger 15–20 per day over 3 days</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Label Outreach — Wave 2</div>
+                <ul class="task-list">
+                  <li>Follow up with any label contacts from Phase 1 who haven't responded</li>
+                  <li>Send outreach to next 10 labels on your target list — you now have 5 releases to reference</li>
+                  <li>Track every label interaction in Notion — who responded, what they said, next step</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 5–8</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Jun 30 – Jul 25</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Jul 3 Flip + 🎵 Jul 17 Original — Cadence at Full Speed</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Jul 3 — Flip #3</div>
+                <ul class="task-list">
+                  <li>Submit by Jun 26 for Jul 3 release — keep flip campaigns lean and fast</li>
+                  <li>TikTok video first to gauge interest, then release push</li>
+                  <li>Use the original song's fanbase as a discovery angle — include original title in metadata</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Jul 17 — Original #6</div>
+                <ul class="task-list">
+                  <li>Your 6th release — the playbook should feel automatic by now</li>
+                  <li>Run your Tier 1 playlist list (your proven converters) immediately</li>
+                  <li>At this point you should have enough streams data to know what genres/moods resonate most — lean into that</li>
+                  <li>Cumulative streams check: should be heading toward 55–65K by late July</li>
+                </ul>
+              </div>
+            </div>
+            <div style="background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.2);padding:12px 16px;margin-top:12px;font-size:12px;color:var(--muted);">
+              <strong style="color:#b89fd4;">🏷️ Label Check-In (July):</strong> By mid-July you'll have 6 originals + 3 flips live. You have real data. This is when label outreach gets serious — you're not hoping anymore, you're showing proof. If any labels from Phase 1 outreach showed interest, follow up with your latest stats.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 9–14</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Jul 28 – Sep 4</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Jul 31 + 🎵 Aug 14 + 🔀 Aug 28 + Label Deal #1 Push</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Release Cadence Continues</div>
+                <ul class="task-list">
+                  <li>Jul 31: Flip #4 — lighter campaign, TikTok-first, discovery play</li>
+                  <li>Aug 14: Original #7 — run full playbook, activate Tier 1 curators + creators</li>
+                  <li>Aug 28: Flip #5 — same lean formula</li>
+                  <li>Aug/Sep original: transitions you into Phase 3 with serious momentum</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Label Deal #1 — Close by Sep 4</div>
+                <ul class="task-list">
+                  <li>This is your Phase 2 moonshot: convert a label conversation into a signed deal</li>
+                  <li>You'll have 8+ releases, real streaming numbers, and a creator network — that's your leverage</li>
+                  <li>Read Passman before signing anything — understand what you're agreeing to</li>
+                  <li>If no deal closes by Sep 4, that's OK — the pipeline is built and Phase 3 will close it</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:12px;padding:12px 16px;background:rgba(232,57,74,0.04);border:1px solid rgba(232,57,74,0.1);font-size:12px;color:var(--muted);">
+              <strong style="color:var(--text);">📖 Selling skill — label negotiation:</strong> A label deal conversation is a sales negotiation where you're selling yourself. The artist who walks in saying "I'd love to work with you" has no leverage. The artist who walks in saying "here's what I've built, here's what I need to keep building it, here are my terms" has all of it. Before any serious conversation: write down your walk-away number (minimum advance), your ideal terms (licensing vs. transfer, deal length), and your BATNA (what you'll do if they say no). Never negotiate without knowing those three things.
+            </div>
+            <div style="margin-top:16px;">
+              <div class="detail-label" style="margin-bottom:8px;">Phase 2 Exit Checklist — Complete by Sep 4</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>✅ 4 more originals released (Jun, Jul x2, Aug)</li>
+                <li>✅ 4 more flips released (Jul, Jul, Aug, Aug)</li>
+                <li>✅ ~65–75K cumulative streams (on pace for 100K by Dec)</li>
+                <li>✅ 50 playlist curators pitched — Tier 1 list locked</li>
+                <li>✅ Creator CRM with 50+ contacts, 10+ active relationships</li>
+                <li>✅ Instagram + TikTok heading toward 5K each</li>
+                <li>✅ Email list at 150+ subscribers</li>
+                <li>✅ Label #1 deal signed OR in serious negotiation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PHASE 3 -->
+    <div id="phase-3" class="phase-content" style="display:none">
+      <div class="phase-header">
+        <div class="phase-period">Sep 7 – Dec 31, 2026 · 17 Weeks</div>
+        <div class="phase-title">Scale</div>
+        <p class="phase-desc">You're in the home stretch. Catalog is deep, systems are tight, and label deal #1 should be signed or close. This phase closes the year — 4 more originals, 4 more flips, label deal #2, and the finish line of 10K followers + 100K streams.</p>
+      </div>
+
+      <div style="margin-bottom:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);">
+        <div class="detail-label" style="margin-bottom:10px;">Phase 3 Release Schedule + Goals</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Sep 18</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Oct 2</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Oct 16</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Oct 30</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Nov 13</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#ff9aad;text-transform:uppercase;margin-bottom:4px;">🔀 Flip</div>
+            <div style="font-size:12px;font-weight:500;">~Nov 27</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(232,57,74,0.06);border:1px solid rgba(232,57,74,0.15);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">🎵 Original</div>
+            <div style="font-size:12px;font-weight:500;">~Dec 11</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.2);">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#b89fd4;text-transform:uppercase;margin-bottom:4px;">🏷️ Goal</div>
+            <div style="font-size:11px;font-weight:500;color:var(--muted);">Label #2 by Dec</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:48px;">
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 1–3</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Sep 7 – Sep 26</div>
+            <div style="font-weight:500;font-size:14px;">🎵 Sep 18 Original + Label Deal #1 Close / Label #2 Outreach</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Sep 18 — Original #9</div>
+                <ul class="task-list">
+                  <li>Run the full playbook — by now it takes you a fraction of the time it did in March</li>
+                  <li>Cumulative streams check: targeting 75–80K by end of September</li>
+                  <li>This release's social push should be your most engaged yet — you have 6 months of audience-building behind it</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Label Deals — Close #1, Start #2</div>
+                <ul class="task-list">
+                  <li>If Label #1 is in negotiation: close it before you sign anything — read the contract with Passman in hand</li>
+                  <li>If Label #1 isn't closed yet: make it the #1 priority this month, not a back-burner item</li>
+                  <li>Start outreach to Label #2 targets this week — you now have 8+ originals, 5+ flips, and real numbers</li>
+                  <li>Your artist deck should be updated with current stats: monthly listeners, follower count, best release performance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 4–6</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Sep 29 – Oct 17</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Oct 2 Flip + 🎵 Oct 16 Original + Automate Operations</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Oct 2 Flip + Oct 16 Original</div>
+                <ul class="task-list">
+                  <li>Oct 2 flip: lean campaign, TikTok-first, discovery play — submit by Sep 25</li>
+                  <li>Oct 16 original: full campaign, activate Tier 1 playlist list and creator CRM</li>
+                  <li>Email your list for both — by now you should have 200+ subscribers</li>
+                  <li>Follower check: should be tracking toward 7–8K on Instagram and TikTok by end of October</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Automation Setup</div>
+                <ul class="task-list">
+                  <li>Set up Make (Integromat): new Spotify release → auto-post announcement to all socials</li>
+                  <li>Use Claude to generate a full month of social content in one 90-min session, schedule in Buffer</li>
+                  <li>Set up Opus Clip — auto-clip any long-form content into short-form reels automatically</li>
+                  <li>Build your SOP library in Notion: document every repeatable task so you (or a future hire) can run it</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 7–10</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Oct 20 – Nov 13</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Oct 30 Flip + 🎵 Nov 13 Original + Revenue + 10K Follower Push</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Oct 30 + Nov 13 Releases</div>
+                <ul class="task-list">
+                  <li>Oct 30 flip: lean and fast — you know the formula</li>
+                  <li>Nov 13 original: this should be one of your strongest campaigns of the year — 8 months of learning behind it</li>
+                  <li>Cumulative streams: should be at 88–95K by mid-November — the 100K milestone is close</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">10K Follower Push</div>
+                <ul class="task-list">
+                  <li>You need to be at ~8K+ followers by now to hit 10K by Dec 31 — assess the gap</li>
+                  <li>If behind on followers: run a focused 30-day content sprint — post daily, double down on your best format</li>
+                  <li>Activate your creator CRM for a follower push: ask your best creator relationships to tag you in content</li>
+                  <li>Revenue: launch Patreon or Bandcamp now — catalog is big enough to offer meaningful back-catalog access</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 11–14</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Nov 16 – Dec 12</div>
+            <div style="font-weight:500;font-size:14px;">🔀 Nov 27 Flip + 🎵 Dec 11 Original + 100K Streams Sprint + Label #2</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Nov 27 + Dec 11 Releases</div>
+                <ul class="task-list">
+                  <li>Nov 27 flip — Thanksgiving week timing, keep it light campaign-wise</li>
+                  <li>Dec 11 original — your final release of the year. Make it count. Biggest campaign of 2026.</li>
+                  <li>Submit Apple Music editorial, Spotify editorial, and Amazon Music Breakthrough for the Dec 11 track</li>
+                  <li>Push Dec 11 hard on your email list — a year of relationship building goes into this one</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">100K Streams + Label #2 Sprint</div>
+                <ul class="task-list">
+                  <li>If streams are close to 100K: activate every lever — email, creators, repost old tracks, playlist follow-ups</li>
+                  <li>Label #2: should be in active conversation by now. Close it before year end if possible.</li>
+                  <li>Register catalog with Musicbed/Artlist for sync licensing — passive income on 12+ tracks now</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;width:80px;flex-shrink:0;">Weeks 15–17</div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:140px;flex-shrink:0;">Dec 15 – Dec 31</div>
+            <div style="font-weight:500;font-size:14px;">Year Review + 2027 Planning</div>
+            <div style="margin-left:auto;font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;">▾</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-top:none;padding:20px 24px;display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">Year-End Audit</div>
+                <ul class="task-list">
+                  <li>Pull every metric: total streams, monthly listeners, follower count (IG + TikTok), email list size, income by stream, releases shipped, playlist placements total</li>
+                  <li>Did you hit 100K streams? 10K followers? 2 label deals? Document the honest result.</li>
+                  <li>Write your "State of Rokki 2026" doc — your new benchmark, your biggest wins, your biggest lessons</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-label" style="margin-bottom:10px;">2027 Planning</div>
+                <ul class="task-list">
+                  <li>Set 2027 targets — bigger now that you have 12 months of data to plan from</li>
+                  <li>Identify the 2–3 things that moved the needle most in 2026 — double down on those</li>
+                  <li>With 2 label deals, what do you want from 2027? More independence? A bigger label? A tour? Get specific.</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="detail-label" style="margin-bottom:8px;">End of Year Exit Checklist — Dec 31</div>
+              <ul class="task-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                <li>✅ 12 originals released across 2026</li>
+                <li>✅ 12 flips released across 2026</li>
+                <li>✅ 100K+ cumulative streams</li>
+                <li>✅ 10K followers on Instagram AND TikTok</li>
+                <li>✅ 2 label deals signed with well-known labels in your market</li>
+                <li>✅ 300+ email subscribers</li>
+                <li>✅ Full SOP library — every process documented</li>
+                <li>✅ At least 1 new revenue stream active (sync, Patreon, merch)</li>
+                <li>✅ 2027 plan written Jan 1 — you know exactly what's next</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+
+      <div class="skill-grid">
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">💬</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-hands">Hands-On</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Selling & Copywriting</div>
+          <div class="card-summary">The gap most artists never close. You can have the best music, best Patreon, and best beats — and still make nothing if you can't write copy that moves people to act or hold a sales conversation with a label.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">The Four Places Selling Shows Up for Rokki</div>
+              <ul class="task-list">
+                <li><strong>Email sequences</strong> — your welcome series, Patreon launch email, and release announcements are all sales copy. They need a hook, a story, and a clear ask.</li>
+                <li><strong>Beat & sync descriptions</strong> — every listing on BeatStars or Musicbed is a micro sales page. Vivid, artist-focused, one sentence that makes someone hear the song before they press play.</li>
+                <li><strong>Patreon & offers</strong> — lead with the identity and belonging ("be part of what I'm building"), then the deliverables. Sell the feeling, back it up with the facts.</li>
+                <li><strong>Label negotiations</strong> — know your walk-away number, your ideal terms, and your BATNA before every conversation. Never negotiate without those three written down.</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Core Skills to Build (in order)</div>
+              <ul class="task-list">
+                <li><strong>Phase 1:</strong> Learn StoryBrand — your fan/buyer is the hero, you're the guide. Apply this to every email and caption you write from now on.</li>
+                <li><strong>Phase 2:</strong> Learn the hook formula — every piece of copy needs one. Problem → agitate → solve, or desire → obstacle → resolution. Claude can help you apply both.</li>
+                <li><strong>Phase 3:</strong> Learn negotiation basics — BATNA, anchoring, silence as a tool. Apply to label deals, booking fees, and any paid collaboration.</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Claude Can Help You With</div>
+              <div class="claude-box">
+                <strong>For any offer or copy task, ask Claude:</strong> "Rewrite this [email/caption/Patreon description/beat listing] using the StoryBrand framework. The reader is an artist/fan who wants [X]. I'm offering [Y]. The call to action is [Z]. Make it feel human, not corporate." <br><br>
+                <strong>For negotiation prep:</strong> "I'm about to negotiate a record deal with [label]. My ideal outcome: [describe]. My walk-away point: [describe]. Role-play as the A&R and give me a realistic opening offer. Help me prepare my counter."
+              </div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Resources</div>
+              <span class="resource-pill"><span class="rtype">Book</span> Building a StoryBrand — Donald Miller</span>
+              <span class="resource-pill"><span class="rtype">Book</span> $100M Leads — Alex Hormozi</span>
+              <span class="resource-pill"><span class="rtype">Book</span> Never Split the Difference — Chris Voss</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">🏷️</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-resource">Study First</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Pitching to Labels & DSPs</div>
+          <div class="card-summary">By month 9 you'll have data, releases, and momentum. Use it. Learn how to approach labels and DSPs from a position of proof, not hope.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">Execution Tasks</div>
+              <ul class="task-list">
+                <li>Build your "artist deck" — a 1-page PDF pitch covering: who you are, your numbers, your sound, your story, your goals</li>
+                <li>Research 10–20 labels that fit your sound — from micro-labels to mid-tier. Focus on ones that signed artists from your streaming tier</li>
+                <li>Find the A&R contact for each — LinkedIn, Twitter, label websites. Build a contact spreadsheet</li>
+                <li>Send cold outreach with a clear, concise pitch + your best 1–2 tracks. Follow up once after 3 weeks</li>
+                <li>Consider DSP direct pitching: Apple Music editorial, Amazon Music Breakthrough</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Claude Can Help You With</div>
+              <div class="claude-box"><strong>Ask Claude:</strong> "Write a cold outreach email to an A&R at [label name]. I have [X monthly listeners], [Y followers], and [describe your recent traction]. Keep it under 200 words and make it not sound like a press release." Claude can also help you structure your entire artist deck.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Resources</div>
+              <span class="resource-pill"><span class="rtype">Book</span> All You Need to Know About the Music Business — Donald Passman</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">🤖</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-ai">AI-Powered</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Automate Your Operations</div>
+          <div class="card-summary">By now your processes are proven. Use AI and automation to remove yourself as the bottleneck on repetitive work.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">Execution Tasks</div>
+              <ul class="task-list">
+                <li>Set up Zapier or Make (free tier) to automate: new release → auto-post to socials, new email subscriber → welcome sequence trigger</li>
+                <li>Use Claude to generate a month of social media captions in one session, then schedule with Buffer or Later</li>
+                <li>Build a "Rokki SOP Library" in Notion — document every repeatable task so a future hire (or AI) can do it</li>
+                <li>Test AI video tools for content creation: Runway, CapCut AI, or Opus Clip to repurpose long-form content automatically</li>
+                <li>Create a monthly "state of Rokki" review template — track every metric in one doc, one hour a month</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Claude Can Help You With</div>
+              <div class="claude-box"><strong>Ask Claude:</strong> "I need to create a month of Instagram + TikTok content for [upcoming release]. Here are my content pillars: [X, Y, Z]. Generate 30 post ideas with hooks and captions." Also use Claude as your weekly brainstorm partner every Monday.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Resources</div>
+              <span class="resource-pill"><span class="rtype">Tool</span> Make (formerly Integromat)</span>
+              <span class="resource-pill"><span class="rtype">Tool</span> Opus Clip — AI content repurposing</span>
+              <span class="resource-pill"><span class="rtype">Tool</span> Buffer — scheduling</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">💰</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-hands">Hands-On</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Revenue Diversification</div>
+          <div class="card-summary">Streaming alone won't pay the bills. Build multiple income streams that work while you sleep and compound as your fanbase grows.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">Execution Tasks</div>
+              <ul class="task-list">
+                <li>Sync licensing: register with Musicbed, Artlist, or Pond5 — your catalog earns passively when used in content</li>
+                <li>Set up a Patreon or Bandcamp — offer exclusive content, early access, or personal interactions for monthly supporters</li>
+                <li>Merch: even a small drop of 1–2 items tied to a release creates a revenue event and deepens fan identity</li>
+                <li>Beat sales / sample packs: if applicable to your genre, sell stems and loops on BeatStars or Splice</li>
+                <li>Track total monthly revenue across all streams — set a 12-month income goal and work backwards</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Claude Can Help You With</div>
+              <div class="claude-box"><strong>Ask Claude:</strong> "Help me build a Patreon tier structure for a [genre] artist. My fanbase is [describe size and engagement]. What should each tier offer and at what price points?"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="toggleCard(this)">
+          <div class="card-top">
+            <div class="card-icon">🌐</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="card-badge badge-hands">Hands-On</span>
+              <span class="toggle-arrow">▾</span>
+            </div>
+          </div>
+          <div class="card-title">Community & Brand Identity</div>
+          <div class="card-summary">Transform your followers into a community with identity. The fans who feel like they belong to something will market you better than any ad.</div>
+          <div class="card-detail">
+            <div class="detail-section">
+              <div class="detail-label">Execution Tasks</div>
+              <ul class="task-list">
+                <li>Give your fanbase a name — and use it consistently. People want to belong to a tribe</li>
+                <li>Create a recurring engagement moment: weekly challenge, Q&A, listening party, or fan feature</li>
+                <li>Use Instagram Close Friends or a Discord server for your inner circle — the top 1% of fans get access</li>
+                <li>Build your brand bible: colors, fonts, photo style, tone of voice — make it consistent across every platform</li>
+                <li>Collaborate with 1–2 artists at a similar level for cross-promotion: co-writes, dual releases, or live sessions</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Claude Can Help You With</div>
+              <div class="claude-box"><strong>Ask Claude:</strong> "Help me define the Rokki brand identity — tone of voice, visual direction, what makes the brand distinct. Here's how I'd describe my music and my personality: [describe yourself]."</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-note">
+        <strong>End of Year Goal:</strong> By December 2026, Rokki should be operating as a lean, documented, AI-assisted music business — with a content machine, a playlist network, a growing email list, label relationships in progress, and multiple revenue streams. You'll have learned by doing, and you'll have built something real.
+      </div>
+    </div>
+
+  </div><!-- end tab-curriculum-content -->
+  </div><!-- end tab-curriculum -->
+
+</main>
+
+  <!-- RELEASE CALENDAR TAB -->
+  <div id="tab-releases" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">Mar 6 – Dec 31, 2026 · 24 Releases</div>
+      <div class="phase-title">Release Calendar</div>
+      <p class="phase-desc">One original every ~28 days. One flip at the midpoint. 12 originals + 12 flips = 24 releases. Every release is a campaign. This is the engine that gets you to 100K streams.</p>
+    </div>
+
+    <div style="margin-bottom:32px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);display:flex;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:10px;height:10px;background:var(--accent);border-radius:2px;flex-shrink:0;"></div> Original (full campaign)</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:10px;height:10px;background:var(--accent2);border-radius:2px;flex-shrink:0;"></div> Flip (lean campaign)</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:10px;height:10px;background:#7b5ea7;border-radius:2px;flex-shrink:0;"></div> Label Goal Milestone</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);">▶ = locked / confirmed date</div>
+    </div>
+
+    <!-- PHASE 1 RELEASES -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">Phase 1 · Mar – May</div>
+    <div style="display:grid;gap:3px;margin-bottom:32px;">
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.3);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);font-weight:700;">Mar 27 ▶</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #1 <span style="color:var(--muted);font-weight:300;font-size:12px;">— Full campaign: pre-save, editorial pitch, 20 curators, email, social</span></div>
+        <div style="font-size:11px;color:var(--muted);text-align:right;font-family:'Space Mono',monospace;">CONFIRMED</div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#ff9aad;">Apr 10 ▶</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #1 <span style="color:var(--muted);font-weight:300;font-size:12px;">— TikTok first, lean campaign, discovery play on existing song's audience</span></div>
+        <div style="font-size:11px;color:var(--muted);text-align:right;font-family:'Space Mono',monospace;">CONFIRMED</div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.3);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);font-weight:700;">Apr 24 ▶</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #2 <span style="color:var(--muted);font-weight:300;font-size:12px;">— Full campaign. Spotify editorial pitch due by Apr 17.</span></div>
+        <div style="font-size:11px;color:var(--muted);text-align:right;font-family:'Space Mono',monospace;">CONFIRMED</div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#ff9aad;">~May 8</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #2 <span style="color:var(--muted);font-weight:300;font-size:12px;">— Midpoint between Apr 24 and May original</span></div>
+        <div style="font-size:11px;color:var(--muted);text-align:right;"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.2);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~May 22</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #3 <span style="color:var(--muted);font-weight:300;font-size:12px;">— First label outreach wave accompanies this release</span></div>
+        <div style="font-size:11px;color:#b89fd4;text-align:right;font-family:'Space Mono',monospace;font-size:10px;">🏷️ LABEL OUTREACH W1</div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 RELEASES -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">Phase 2 · Jun – Sep</div>
+    <div style="display:grid;gap:3px;margin-bottom:32px;">
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Jun 5</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #3</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Jun 19</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #4 <span style="color:var(--muted);font-weight:300;font-size:12px;">— 50 playlist curator campaign launches this month</span></div>
+        <div style="font-size:10px;color:#b89fd4;text-align:right;font-family:'Space Mono',monospace;">🏷️ LABEL OUTREACH W2</div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Jul 3</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #4</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Jul 17</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #5</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Jul 31</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #5</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Aug 14</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #6</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#b89fd4;">~Aug 28</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #6 <span style="color:var(--muted);font-weight:300;font-size:12px;">— Label deal #1 target close by Sep</span></div>
+        <div style="font-size:10px;color:#b89fd4;text-align:right;font-family:'Space Mono',monospace;">🏷️ LABEL DEAL #1 CLOSE</div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 RELEASES -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">Phase 3 · Sep – Dec</div>
+    <div style="display:grid;gap:3px;margin-bottom:32px;">
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Sep 18</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #7</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Oct 2</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #7</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Oct 16</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #8</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Oct 30</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #8</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Nov 13</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #9 <span style="color:var(--muted);font-weight:300;font-size:12px;">— 10K followers push + streams targeting 88–95K</span></div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(232,57,74,0.06);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">~Nov 27</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(255,77,109,0.15);color:#ff9aad;font-family:'Space Mono',monospace;text-align:center;">FLIP</div>
+        <div style="font-size:13px;font-weight:500;">Flip #9</div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 80px 1fr 160px;align-items:center;gap:16px;padding:12px 16px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#b89fd4;">~Dec 11</div>
+        <div style="font-size:10px;padding:3px 8px;background:rgba(232,57,74,0.15);color:var(--accent);font-family:'Space Mono',monospace;text-align:center;">ORIGINAL</div>
+        <div style="font-size:13px;font-weight:500;">Original #10 — <span style="color:#b89fd4;font-weight:400;">The Year-Closer. Biggest campaign of 2026.</span></div>
+        <div style="font-size:10px;color:#b89fd4;text-align:right;font-family:'Space Mono',monospace;">🏷️ LABEL DEAL #2 TARGET</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <strong>Note on flip licensing:</strong> Before releasing a flip on streaming platforms, you need a mechanical license for the original song. DistroKid's cover song licensing (powered by Harry Fox/Songfile) handles this for ~$25/song/year. Alternatively, release flips on SoundCloud or YouTube as fan edits first — use that traction to gauge interest before committing to a licensed release.
+    </div>
+  </div>
+
+  <!-- GOALS TAB -->
+  <div id="tab-goals" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">Mar 6, 2026 – Jun 30, 2027</div>
+      <div class="phase-title">Goals & Milestones</div>
+      <p class="phase-desc">Five hard goals across two years. Here's the math on how you hit each one, the pace you need to be on, and the warning signs to watch for. The revenue goal has its own dedicated tab — go there for the full breakdown.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;">
+
+      <!-- STREAMS GOAL -->
+      <div style="background:var(--surface);border:1px solid var(--border);padding:28px;grid-column:1/-1;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">🎧 Goal #1</div>
+            <div style="font-size:28px;font-weight:500;">100,000 Streams by Dec 31</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Across all DSPs — Spotify, Apple Music, Amazon, YouTube Music, Tidal</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Target pace</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--accent);line-height:1;">~10K/mo</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;">
+          <div style="padding:12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.2);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">END OF MAR</div>
+            <div style="font-size:14px;font-weight:500;color:var(--accent);">~3K</div>
+          </div>
+          <div style="padding:12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.2);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">END OF MAY</div>
+            <div style="font-size:14px;font-weight:500;color:var(--accent);">~20K</div>
+          </div>
+          <div style="padding:12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.2);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">END OF AUG</div>
+            <div style="font-size:14px;font-weight:500;color:var(--accent);">~60K</div>
+          </div>
+          <div style="padding:12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.2);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:4px;">END OF OCT</div>
+            <div style="font-size:14px;font-weight:500;color:var(--accent);">~82K</div>
+          </div>
+          <div style="padding:12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.3);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px;">DEC 31</div>
+            <div style="font-size:14px;font-weight:700;color:var(--accent);">100K ✓</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+          <strong style="color:var(--text);">The math:</strong> 24 releases × ~4,000 avg streams each = 96K. Plus catalog tail (older releases keep streaming) pushes you over. Playlist adds are the multiplier — one decent playlist placement can add 3–5K streams alone. This is why 50 curator pitches in Phase 2 matters so much.<br><br>
+          <strong style="color:var(--text);">Warning sign:</strong> If you're under 15K by end of May, you need more aggressive playlist pitching and creator activation immediately — don't wait for Phase 2.
+        </div>
+      </div>
+
+      <!-- FOLLOWERS GOAL -->
+      <div style="background:var(--surface);border:1px solid var(--border);padding:28px;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">👥 Goal #2</div>
+        <div style="font-size:22px;font-weight:500;margin-bottom:4px;">10K Followers</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">Instagram AND TikTok — independently each</div>
+        <div style="display:grid;gap:6px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">End of Phase 1 (May 29)</span>
+            <span style="font-family:'Space Mono',monospace;color:var(--accent);">~2,500 each</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">End of Phase 2 (Sep 4)</span>
+            <span style="font-family:'Space Mono',monospace;color:var(--accent);">~6,000 each</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">End of Oct (trigger check)</span>
+            <span style="font-family:'Space Mono',monospace;color:var(--accent);">~8,000 each</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.3);font-size:12px;">
+            <span>Dec 31</span>
+            <span style="font-family:'Space Mono',monospace;color:var(--accent);font-weight:700;">10,000 each ✓</span>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;"><strong style="color:var(--text);">The levers:</strong> Consistent posting (3–5x/week) + releases + creator network. A single viral clip can add 500–2,000 followers overnight — but you can't plan for that, only create conditions for it.<br><br><strong style="color:var(--text);">Warning sign:</strong> If you're under 5K by September, activate a 30-day daily posting sprint immediately.</div>
+      </div>
+
+      <!-- LABEL GOAL -->
+      <div style="background:var(--surface);border:1px solid var(--border);padding:28px;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:#b89fd4;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">🏷️ Goal #3</div>
+        <div style="font-size:22px;font-weight:500;margin-bottom:4px;">2 Label Deals — Well-Known Labels</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">In your market. Signed, not just "in conversation."</div>
+        <div style="display:grid;gap:6px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">May — Label research + 5 outreach emails</span>
+            <span style="font-family:'Space Mono',monospace;color:#b89fd4;font-size:10px;">WAVE 1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">Jun — 10 more outreach, follow-ups from W1</span>
+            <span style="font-family:'Space Mono',monospace;color:#b89fd4;font-size:10px;">WAVE 2</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);font-size:12px;">
+            <span style="color:var(--muted);">Jul–Aug — Conversations active, negotiating</span>
+            <span style="font-family:'Space Mono',monospace;color:#b89fd4;font-size:10px;">CLOSE #1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);font-size:12px;">
+            <span>Sep — Label #1 signed. Label #2 pipeline active.</span>
+            <span style="font-family:'Space Mono',monospace;color:#b89fd4;font-size:10px;">🏷️ DEAL #1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);font-size:12px;">
+            <span>Dec — Label #2 signed.</span>
+            <span style="font-family:'Space Mono',monospace;color:#b89fd4;font-size:10px;">🏷️ DEAL #2</span>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;"><strong style="color:var(--text);">Key insight:</strong> Labels don't sign potential — they sign proof. By May you'll have 5 releases and real data. By September you'll have 12+. Approach every label with "here's what I've already built" not "here's what I could do." Read Passman before you sign anything.</div>
+      </div>
+
+      <!-- REVENUE GOAL SUMMARY CARD -->
+      <div style="background:var(--surface);border:1px solid var(--border);padding:28px;grid-column:1/-1;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:180px;color:rgba(232,57,74,0.03);pointer-events:none;white-space:nowrap;">$$$</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">💰 Goals #4 & #5</div>
+            <div style="font-size:28px;font-weight:500;">$4K/mo Post-Tax by Dec 2026 → $10K/mo by Jun 2027</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Extra income on top of whatever you currently earn. Music-derived. Built across multiple streams.</div>
+          </div>
+          <button onclick="switchTab('revenue', document.querySelectorAll('.tab-btn')[3])" style="cursor:pointer;display:inline-block;padding:10px 20px;background:var(--accent);color:#0a0a0f;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;flex-shrink:0;border:none;">View Revenue Plan →</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div style="padding:16px;background:var(--surface2);border:1px solid var(--border);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:6px;">TODAY</div>
+            <div style="font-size:20px;font-weight:500;color:var(--muted);">$0</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">baseline</div>
+          </div>
+          <div style="padding:16px;background:rgba(232,57,74,0.05);border:1px solid rgba(232,57,74,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:6px;">SEP 2026</div>
+            <div style="font-size:20px;font-weight:500;color:var(--accent);">$1–2K</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">first consistent income</div>
+          </div>
+          <div style="padding:16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.25);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:6px;">DEC 2026</div>
+            <div style="font-size:20px;font-weight:700;color:var(--accent);">$4K</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">post-tax target ✓</div>
+          </div>
+          <div style="padding:16px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:#b89fd4;margin-bottom:6px;">JUN 2027</div>
+            <div style="font-size:20px;font-weight:700;color:#b89fd4;">$10K</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">post-tax target ✓</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-note">
+      <strong>How these goals connect:</strong> Streams and followers build the audience. The audience enables the revenue. The label deals add advance money and distribution reach. None of them are independent — they all compound each other. Hit the release cadence, and the rest follows.
+    </div>
+  </div>
+
+  <!-- REVENUE PLAN TAB -->
+  <div id="tab-revenue" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">Mar 2026 – Jun 2027</div>
+      <div class="phase-title">Revenue Plan</div>
+      <p class="phase-desc">$4K/mo post-tax by Dec 2026. $10K/mo post-tax by Jun 2027. This isn't one big income source — it's six streams that each contribute a piece, timed to when you'll realistically have the audience and catalog to activate them.</p>
+    </div>
+
+    <!-- THE HONEST MATH BOX -->
+    <div style="background:var(--surface);border:1px solid rgba(232,57,74,0.2);border-left:3px solid var(--accent);padding:20px 24px;margin-bottom:32px;font-size:13px;line-height:1.8;color:var(--muted);">
+      <strong style="color:var(--text);display:block;margin-bottom:8px;">The honest math upfront</strong>
+      Streaming alone won't get you there. 100K streams on Spotify pays roughly $400–500. That's a foundation, not a business. The $4K target requires stacking multiple streams — streaming royalties, label advances, sync licensing, beat/sample sales, direct fan support, and live/DJ bookings. Some of these activate early, some require you to build an audience first. The plan below sequences them in order of what you can realistically start when.
+    </div>
+
+    <!-- INCOME STREAM BREAKDOWN -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">The 6 Revenue Streams — Sequenced by When to Activate</div>
+
+    <div style="display:grid;gap:3px;margin-bottom:40px;">
+
+      <!-- STREAM 1: BEATS/STEMS -->
+      <div style="background:var(--surface);border:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);line-height:1;">01</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Beat Sales & Stem Packs</div>
+            <div style="font-size:12px;color:var(--muted);">Start: April 2026 &nbsp;·&nbsp; Platform: BeatStars, Airbit, Gumroad</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">target by Dec</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);">$500–800/mo</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid var(--border);margin-top:0;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">Why start here first</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">You're already making music. Packaging that production as a product requires almost no extra work — and it starts generating income before you have a significant audience. Even 5–10 beat sales/month at $30–100 each adds up fast.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">How to execute</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li>Set up a BeatStars Pro page ($20/mo) — upload 10–20 beats or instrumentals from your catalog</li>
+                <li>Price leases at $30–50, exclusives at $200–500. Offer stem packs for $75–150.</li>
+                <li>Post "beat tape" content on TikTok/IG — producers and artists are actively searching for this</li>
+                <li>Every flip you make? Upload the instrumental. It's already done — just package it.</li>
+                <li>By end of 2026 goal: 20+ beats listed, generating passive sales from your social traffic</li>
+              </ul>
+            </div>
+          </div>
+          <div class="claude-box" style="margin-top:12px;"><strong>Ask Claude:</strong> "Write 10 TikTok captions for beat/instrumental videos. I produce [genre] music. The captions should appeal to artists looking for beats and drive them to my BeatStars page. Make them sound like a producer, not a salesperson."</div>
+          <div style="margin-top:10px;padding:12px 16px;background:rgba(232,57,74,0.04);border:1px solid rgba(232,57,74,0.1);font-size:12px;color:var(--muted);">
+            <strong style="color:var(--text);">📖 Selling skill — beat page copy:</strong> Write a one-sentence description for every beat that paints a picture of the song it could become ("dark 808s for a late-night confessional"). List your most expensive exclusive first — price anchoring makes leases feel like a deal by comparison. Use Claude: "Write sales descriptions for these 10 beats. Genre: [X]. Make each one 1–2 sentences, vivid, artist-focused."
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM 2: SYNC LICENSING -->
+      <div style="background:var(--surface);border:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);line-height:1;">02</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Sync Licensing</div>
+            <div style="font-size:12px;color:var(--muted);">Start: May 2026 &nbsp;·&nbsp; Platform: Musicbed, Artlist, Pond5, Epidemic Sound</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">target by Dec</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);">$300–600/mo</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid var(--border);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">Why this is pure passive income</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">You upload your catalog once. When a YouTuber, brand, filmmaker, or creator uses your track — you get paid. No additional work. By May you'll have 5+ originals and 2+ flips registered. That catalog grows every month.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">How to execute</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li>Register with Musicbed (quality bar is high but pays well — $50–500 per license) and/or Artlist</li>
+                <li>Also submit to Pond5 and AudioJungle for broader reach at lower price points</li>
+                <li>Ensure you own 100% of your masters before registering — no samples in the tracks</li>
+                <li>Register all tracks with a PRO (ASCAP, BMI, or SOCAN) to collect performance royalties on top</li>
+                <li>Goal: 20+ tracks registered across 2 platforms by Sep 2026. Income is slow at first, compounds by 2027.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM 3: STREAMING ROYALTIES -->
+      <div style="background:var(--surface);border:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);line-height:1;">03</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Streaming Royalties + PRO Income</div>
+            <div style="font-size:12px;color:var(--muted);">Active: now &nbsp;·&nbsp; Grows with: release cadence + playlist placements</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">target by Dec</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);">$400–700/mo</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid var(--border);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">The realistic numbers</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">Spotify pays ~$0.003–0.005/stream. 100K streams = $300–500. Add Apple Music ($0.01/stream), Tidal ($0.013), and YouTube, and your blended rate improves. PRO royalties (performance rights) add another layer on top — register every track before release.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">How to maximise this</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li>Register with a PRO (ASCAP or BMI in the US, SOCAN in Canada) immediately — they collect radio, streaming, and performance royalties</li>
+                <li>Use DistroKid's "Songwriter" add-on or similar to collect publishing royalties from mechanical rights</li>
+                <li>Playlist placements are the multiplier — one Spotify editorial placement can add 20–50K streams on a single track</li>
+                <li>Catalog matters: 24 releases by Dec means 24 tracks earning simultaneously. By 2027 that tail income compounds significantly.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM 4: DIRECT FAN SUPPORT -->
+      <div style="background:var(--surface);border:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.nextElementSibling.style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);line-height:1;">04</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Direct Fan Support — Patreon / Bandcamp</div>
+            <div style="font-size:12px;color:var(--muted);">Start: Sep 2026 (once you have an audience) &nbsp;·&nbsp; Platform: Patreon, Bandcamp</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">target by Dec</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);">$500–1,000/mo</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid var(--border);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">Why September, not now</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">Patreon only works if people already care about you. Launch it too early and it looks empty and desperate. By September you'll have 6K+ followers across platforms, a real email list, and 12+ releases — that's an audience ready to support you.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">How to structure it</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li><strong style="color:var(--text)">Tier 1 — $5/mo:</strong> Early access to every release 1 week before it drops</li>
+                <li><strong style="color:var(--text)">Tier 2 — $15/mo:</strong> Early access + exclusive stems/loops + monthly Q&A</li>
+                <li><strong style="color:var(--text)">Tier 3 — $50/mo:</strong> Everything above + your personal beat feedback on 1 track/month</li>
+                <li>100 fans at $5 = $500/mo. 50 fans at $15 = $750/mo. These are realistic by December with 6K+ followers.</li>
+                <li>Bandcamp: sell your catalog as downloads with "name your price" — even small amounts add up</li>
+              </ul>
+            </div>
+          </div>
+          <div class="claude-box" style="margin-top:12px;"><strong>Ask Claude in September:</strong> "Help me write my Patreon launch post and the descriptions for 3 membership tiers. I'm Rokki, I make [genre] music. I have [X] followers and [Y] email subscribers. I want tiers at $5, $15, and $50/month. Make it feel exclusive and personal, not transactional."</div>
+          <div style="margin-top:10px;padding:12px 16px;background:rgba(232,57,74,0.04);border:1px solid rgba(232,57,74,0.1);font-size:12px;color:var(--muted);">
+            <strong style="color:var(--text);">📖 Selling skill — Patreon launch:</strong> The single biggest mistake artists make launching Patreon is leading with what's in the tiers. Lead with <em>why</em> instead — why you're building this, what it means to you, what kind of relationship you want with your real fans. People don't pay $15/month for stems. They pay because they want to be part of something. Sell the belonging, not the deliverable. Then list the deliverables.
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM 5: LABEL ADVANCES -->
+      <div style="background:var(--surface);border:1px solid rgba(123,94,167,0.3);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#b89fd4;line-height:1;">05</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Label Advances</div>
+            <div style="font-size:12px;color:var(--muted);">Start: Sep–Dec 2026 (when deals close) &nbsp;·&nbsp; One-time but significant</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">typical range</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:#b89fd4;">$2–20K+/deal</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid rgba(123,94,167,0.2);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">What a label advance actually is</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">An advance is a loan against future royalties — not free money. The label recoups it from your earnings before you see royalties. Smaller well-known labels in your market might offer $2–10K for a single or EP deal. That said, even a $5K advance paid out at signing is real income that counts toward your monthly target that month.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">What to negotiate for</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li>Advance paid in two installments: 50% at signing, 50% on release — protects you if the label stalls</li>
+                <li>Short term: aim for 1–2 year deals, not multi-album 5-year deals at this stage</li>
+                <li>Retain as much of your masters as possible — a license deal is better than a full transfer for an emerging artist</li>
+                <li>Read Passman's chapter on record deals before you sit in any negotiation room</li>
+              </ul>
+            </div>
+          </div>
+          <div style="background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.15);padding:12px 16px;margin-top:12px;font-size:12px;color:var(--muted);">
+            <strong style="color:#ff9aad;">⚠️ Important:</strong> Don't rely on advances for monthly income — they're lumpy and unpredictable. Count them as a bonus that clears your month's target when they arrive, not as recurring revenue. The other 5 streams are your foundation.
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM 6: LIVE/DJ BOOKINGS -->
+      <div style="background:var(--surface);border:1px solid var(--border);">
+        <div style="display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 20px;cursor:pointer;" onclick="this.parentElement.querySelector('.rev-detail').style.display=this.parentElement.querySelector('.rev-detail').style.display==='none'?'block':'none'">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);line-height:1;">06</div>
+          <div>
+            <div style="font-weight:500;font-size:14px;margin-bottom:2px;">Live Performance & DJ Bookings</div>
+            <div style="font-size:12px;color:var(--muted);">Start: anytime — but grows significantly with audience size</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">target by Dec</div>
+            <div style="font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);">$500–1,500/mo</div>
+          </div>
+        </div>
+        <div class="rev-detail" style="display:none;padding:0 20px 20px;border-top:1px solid var(--border);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:16px;">
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">The compounding effect</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.7;">Every show you play also generates streams — people Shazam your set, follow you afterward, and share clips. Bookings are income AND marketing simultaneously. Even 2 shows/month at $300–750 each = $600–1,500/mo with zero overhead.</p>
+            </div>
+            <div>
+              <div class="detail-label" style="margin-bottom:10px;">How to grow bookings</div>
+              <ul class="task-list" style="font-size:12px;">
+                <li>Start local: approach bars, clubs, events, and promoters in your market directly — don't wait for inbound</li>
+                <li>Create a simple booking press kit (1-page PDF): your bio, your music, your social stats, your rate card</li>
+                <li>Post set or performance content on TikTok — promoters book artists they've seen online performing</li>
+                <li>As your follower count grows, your rate grows. 10K followers = significantly easier booking conversations</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- THE $4K STACK -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">How $4K/mo Stacks by December 2026</div>
+    <div style="background:var(--surface);border:1px solid var(--border);padding:24px;margin-bottom:32px;">
+      <div style="display:grid;gap:8px;margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Beat sales & stem packs</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$600</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Sync licensing (Musicbed / Artlist)</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$400</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Streaming royalties + PRO (100K+ streams)</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Patreon / Bandcamp (100 fans @ avg $8/mo)</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$800</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Live / DJ bookings (2–3 shows/mo @ $400 avg)</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$900</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Label advance contribution (amortised)</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">$500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.3);font-size:14px;font-weight:500;">
+          <span>Total gross</span>
+          <span style="font-family:'Space Mono',monospace;color:var(--accent);">~$3,700</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);padding:8px 16px;line-height:1.6;">
+          After expenses (DistroKid, BeatStars, Buffer, etc. ~$100–150/mo), the post-tax figure lands right at $4K with a modest tax rate. The label advance is counted once — replace it with merch or a second Patreon push for a recurring alternative. <strong style="color:var(--text);">This is conservative math.</strong> A single viral month or one well-placed sync deal can 2–3x any single stream temporarily.
+        </div>
+      </div>
+    </div>
+
+    <!-- THE $10K STACK -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">How $10K/mo Stacks by June 2027</div>
+    <div style="background:var(--surface);border:1px solid rgba(123,94,167,0.3);padding:24px;margin-bottom:32px;">
+      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px;">By mid-2027 you'll have 18+ months of releases, ~20K followers, 2 label deals generating ongoing royalties, and a Patreon audience that's had 6+ months to grow. Here's what that looks like:</p>
+      <div style="display:grid;gap:8px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Beat sales & stem packs (bigger catalog, more traffic)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$1,200</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Sync licensing (30+ tracks registered, compounding)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$800</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Streaming + PRO royalties (200K+ streams catalog)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$1,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Patreon / Bandcamp (300+ fans @ avg $10/mo)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$3,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Live / DJ bookings (4–6 shows/mo, higher rate)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$2,500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Label royalties from 2 deals (ongoing, post-recoupment)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$1,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:13px;">
+          <span>Merch (tied to releases and shows)</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">$500</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);font-size:14px;font-weight:500;">
+          <span>Total gross</span>
+          <span style="font-family:'Space Mono',monospace;color:#b89fd4;">~$10,000</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;">The Patreon number is the biggest leap — growing from 100 to 300+ paying fans requires real audience loyalty, which is why the 2026 content machine and email list work directly feeds this. The live bookings rate increase reflects your growing reputation: 10K+ followers + 2 label deals means promoters will pay more.</div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div style="margin-bottom:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);">Revenue Build Timeline</div>
+    <div style="display:grid;gap:3px;margin-bottom:32px;">
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Apr–May 2026</div>
+        <div style="font-size:12px;">Launch BeatStars + sync registration. First beat sales. Streaming royalties begin. <span style="color:var(--muted);">Target: $100–300/mo</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Jun–Aug 2026</div>
+        <div style="font-size:12px;">Beat sales growing. First sync licenses. First bookings. PRO collecting. <span style="color:var(--muted);">Target: $500–1,000/mo</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Sep 2026</div>
+        <div style="font-size:12px;">Patreon launches. Label deal #1 advance lands. Bookings rate increases. <span style="color:var(--muted);">Target: $1,500–2,500/mo</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:rgba(232,57,74,0.08);border:1px solid rgba(232,57,74,0.25);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">Dec 2026 ✓</div>
+        <div style="font-size:12px;"><strong>All 6 streams active.</strong> Label deal #2 advance. Patreon at 100+ members. Sync catalog at 20+ tracks. <span style="color:var(--accent);">Target: $4K/mo post-tax</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Jan–Mar 2027</div>
+        <div style="font-size:12px;">Patreon growing. Sync catalog compounding. More bookings. More releases = more streams. <span style="color:var(--muted);">Target: $5–7K/mo</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;padding:12px 16px;background:rgba(123,94,167,0.1);border:1px solid rgba(123,94,167,0.3);">
+        <div style="font-family:'Space Mono',monospace;font-size:11px;color:#b89fd4;">Jun 2027 ✓</div>
+        <div style="font-size:12px;"><strong>300+ Patreon members. 30+ sync tracks. Higher booking rate. Label royalties flowing.</strong> <span style="color:#b89fd4;">Target: $10K/mo post-tax</span></div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <strong>The single most important lever for hitting $10K:</strong> Patreon. It's the one stream where you have the most direct control and the highest per-fan value. 300 fans paying $10/month is $3K alone — and it grows proportionally with your audience. Everything else in the curriculum (content machine, email list, release cadence) directly feeds this number. Build the audience first, monetise it second.<br><br>
+      <strong>The skill that unlocks every number on this page faster:</strong> Copywriting. The difference between a Patreon that gets 10 members and one that gets 300 is almost entirely how it's written. Same with beat descriptions, email sequences, and label pitches. See the <strong>Selling & Copywriting</strong> skill card in the Curriculum tab (Phase 3) and the books in the Resources tab.
+    </div>
+  </div>
+
+  <!-- WEEKLY RHYTHM TAB -->
+  <div id="tab-weekly" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">Starting Week of Mar 9 · Every Week</div>
+      <div class="phase-title">Weekly Rhythm</div>
+      <p class="phase-desc">You're one person. This rhythm is built to be sustainable — not a grind, but a consistent engine. ~8 hours per week across creation, growth, and operations. Start this rhythm <strong style="color:var(--accent)">this Monday, March 9.</strong></p>
+    </div>
+
+    <div class="week-grid">
+      <div class="week-row">
+        <div class="week-label">Monday<br>~45 min</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot"></div>Weekly CEO review: what's the priority this week? What's releasing, what needs pitching?</div>
+          <div class="week-task-item"><div class="task-dot"></div>Use Claude to plan the week: paste your goals and get a prioritised task list back</div>
+          <div class="week-task-item"><div class="task-dot purple"></div>Check analytics from last week — note anything that spiked</div>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">Tuesday<br>~2 hrs</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot red"></div>Content creation session — film, record, or produce 3–5 pieces of raw content material</div>
+          <div class="week-task-item"><div class="task-dot"></div>Write captions and hooks using Claude — batch-generate for the full week</div>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">Wednesday<br>~1.5 hrs</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot purple"></div>Outreach day: follow up on playlist pitches, creator DMs, label contacts</div>
+          <div class="week-task-item"><div class="task-dot"></div>Submit to 5–10 playlists on SubmitHub or Groover</div>
+          <div class="week-task-item"><div class="task-dot"></div>Respond to all DMs and comments — algorithm engagement + fan relationship building</div>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">Thursday<br>~1.5 hrs</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot red"></div>Music / creative work — produce, write, or arrange. This time is protected for the craft</div>
+          <div class="week-task-item"><div class="task-dot purple"></div>Edit and schedule content for the following week using Buffer or Later</div>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">Friday<br>~1 hr</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot"></div>Email list: send one email to your list (doesn't need to be long — a personal update, a link, a story)</div>
+          <div class="week-task-item"><div class="task-dot purple"></div>Research: read one article or watch one video related to music marketing or business</div>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label">Weekend<br>Flexible</div>
+        <div class="week-tasks">
+          <div class="week-task-item"><div class="task-dot red"></div>Music creation if inspiration hits — but don't force it, protect creative energy</div>
+          <div class="week-task-item"><div class="task-dot"></div>Engage with your community: reply to comments, share fan content, show up as a person</div>
+          <div class="week-task-item"><div class="task-dot purple"></div>Rest — burnout is the #1 killer of solo artists. Protect it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:24px;margin-top:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><div class="task-dot" style="flex-shrink:0"></div> Growth / Business</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><div class="task-dot red" style="flex-shrink:0"></div> Creative / Music</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)"><div class="task-dot purple" style="flex-shrink:0"></div> Learning / Systems</div>
+    </div>
+  </div>
+
+  <!-- AI STACK TAB -->
+  <div id="tab-aistack" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">Tools · Your AI-Powered Team</div>
+      <div class="phase-title">AI Stack</div>
+      <p class="phase-desc">You're a team of one. These tools are your invisible staff — a copywriter, strategist, editor, analyst, and manager — all on demand, all for less than a coffee a day.</p>
+    </div>
+
+    <table class="tools-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>What You Use It For</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="tool-name">Claude (this!)</div></td>
+          <td>Everything: content strategy, writing captions, pitch emails, business planning, creative brainstorming, weekly planning, analytics interpretation</td>
+          <td><span class="tool-cost">~$20/mo</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Opus Clip</div></td>
+          <td>Auto-clips long-form content (livestreams, interviews, behind-the-scenes) into short TikTok/Reels-ready clips with captions</td>
+          <td><span class="tool-cost">Free tier</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">CapCut</div></td>
+          <td>Video editing with AI captions, effects, and templates — fast content creation without a desktop editor</td>
+          <td><span class="tool-cost">Free</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Buffer / Later</div></td>
+          <td>Schedule all your content in one batch session so you're not scrambling to post every day</td>
+          <td><span class="tool-cost">~$15/mo</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Notion AI</div></td>
+          <td>Your business OS. Summarises notes, drafts docs, auto-fills templates in your Notion workspace</td>
+          <td><span class="tool-cost">~$10/mo add-on</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Suno / Udio</div></td>
+          <td>Generate reference tracks, explore new genres, ideate sonic directions — not for releasing, for exploring</td>
+          <td><span class="tool-cost">Free tier</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Make (Integromat)</div></td>
+          <td>Automate workflows: new release → post to socials, new subscriber → trigger email, analytics → weekly report</td>
+          <td><span class="tool-cost">Free tier</span></td>
+        </tr>
+        <tr>
+          <td><div class="tool-name">Canva AI</div></td>
+          <td>Create album art, social graphics, press kits. AI features handle background removal, text generation, image generation</td>
+          <td><span class="tool-cost">~$13/mo</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"><span class="divider-text">How to use Claude as your strategic partner</span></div>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="card-icon" style="margin-bottom:12px">📝</div>
+        <div class="card-title">Weekly Briefing</div>
+        <div class="card-summary" style="margin-top:8px">Every Monday, paste your goals and upcoming releases into Claude and ask: "What should I focus on this week and in what order? Here's what's on my plate: [list]."</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-icon" style="margin-bottom:12px">📣</div>
+        <div class="card-title">Batch Content Creation</div>
+        <div class="card-summary" style="margin-top:8px">Once a week: "Generate 7 TikTok hooks, 7 Instagram captions, and 3 email subject lines for [upcoming song/campaign]. My audience is [describe them]."</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-icon" style="margin-bottom:12px">📊</div>
+        <div class="card-title">Analytics Interpreter</div>
+        <div class="card-summary" style="margin-top:8px">Paste your Spotify for Artists or social analytics and ask: "What's working? What should I do more of? What should I drop?" Turn data into decisions.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-icon" style="margin-bottom:12px">✉️</div>
+        <div class="card-title">Pitch & Outreach Writer</div>
+        <div class="card-summary" style="margin-top:8px">Never write a cold email from scratch. Give Claude context: who you're writing to, your goal, your stats, your sound. Get a draft in 10 seconds. Edit 20%.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOURCES TAB -->
+  <div id="tab-resources" style="display:none;padding:48px 60px;">
+    <div class="phase-header">
+      <div class="phase-period">References · Read & Learn</div>
+      <div class="phase-title">Books & Courses</div>
+      <p class="phase-desc">Most of this curriculum is learned by doing — but these are the resources worth investing time in. Organised by when in the year they're most relevant.</p>
+    </div>
+
+    <div class="section-divider"><span class="divider-text">Phase 1 · Read First</span></div>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">This Is Marketing</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Seth Godin</div>
+        <div class="card-summary">The foundational text on reaching people who want to be reached. Reframes marketing from interruption to connection — essential mindset for an independent artist.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">YouTube Course · Free</div>
+        <div class="card-title">Damian Keyes — Music Marketing</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">YouTube Channel</div>
+        <div class="card-summary">Ex-label A&R who now teaches independent artists. Practical, no-BS strategies for social, streaming, and building a fanbase from zero. Spend 2–3 hours bingeing his channel early on.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">Jab, Jab, Jab, Right Hook</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Gary Vaynerchuk</div>
+        <div class="card-summary">Platform-by-platform social media strategy. Despite being slightly dated, the core principle — give value many times before you ask for anything — is timeless and critical for artists.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-ai" style="margin-bottom:12px">Free</div>
+        <div class="card-title">Spotify for Artists Academy</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">artists.spotify.com</div>
+        <div class="card-summary">Official Spotify learning resources — covers editorial pitching, playlist strategy, how the algorithm actually works, and how to read your data. 2 hours well spent.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"><span class="divider-text">Phase 2 · Read When Executing</span></div>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book · Start Here</div>
+        <div class="card-title">Building a StoryBrand</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Donald Miller</div>
+        <div class="card-summary">The single most useful framework for writing any copy as an artist. Your fan is the hero — you're the guide who helps them get what they want. Once you see it, you can't unsee it. Applies to every email, caption, Patreon pitch, and beat description you'll ever write.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">Never Split the Difference</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Chris Voss</div>
+        <div class="card-summary">FBI hostage negotiator teaches you how to negotiate anything. Read this before any label conversation, booking fee discussion, or collaboration deal. The chapters on anchoring, mirroring, and tactical empathy are directly applicable to music industry negotiations.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">Built to Sell</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">John Warrillow</div>
+        <div class="card-summary">About building a business that runs without you. Directly applicable to building systems and SOPs for Rokki — essential if you want to scale without burning out.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">The Lean Startup</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Eric Ries</div>
+        <div class="card-summary">Build → measure → learn. Directly applicable to releasing music: ship fast, get data, iterate. Teaches you to treat every release as an experiment with a hypothesis.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Course · Paid</div>
+        <div class="card-title">Modern Music Marketing</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Music Gateway / Coursera</div>
+        <div class="card-summary">Covers digital marketing for music specifically: streaming strategy, social ads, influencer marketing, PR. Good structured curriculum if you want more than YouTube videos.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-ai" style="margin-bottom:12px">Free Newsletter</div>
+        <div class="card-title">Water & Music</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">waterandmusic.com</div>
+        <div class="card-summary">The best music industry newsletter for independent artists who want to understand how streaming, DSPs, and the modern music business actually works. Read every issue.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"><span class="divider-text">Phase 3 · Read When Scaling</span></div>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">$100M Leads</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Alex Hormozi</div>
+        <div class="card-summary">How to get strangers to want what you're selling. More tactical than $100M Offers — focuses on how to write hooks, headlines, and offers that get attention and drive action. Directly applicable to Patreon launches, beat sales pages, and email subject lines.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book · Essential</div>
+        <div class="card-title">All You Need to Know About the Music Business</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Donald Passman</div>
+        <div class="card-summary">The bible of music industry contracts, deals, and rights. Read this before you sign anything with a label. Dense but critical when label conversations start getting serious.</div>
+      </div>
+      <div class="skill-card">
+        <div class="card-badge badge-resource" style="margin-bottom:12px">Book</div>
+        <div class="card-title">$100M Offers</div>
+        <div class="card-summary" style="color:var(--accent);font-size:12px;margin-bottom:6px">Alex Hormozi</div>
+        <div class="card-summary">Not about music — but about crafting offers so good people feel stupid saying no. Directly applicable to Patreon tiers, merch drops, and how you position your fan community offers.</div>
+      </div>
+    </div>
+
+    <div class="footer-note" style="margin-top:32px">
+      <strong>How Claude fits in:</strong> You don't need to take every course. For most topics on this curriculum, you can learn faster by doing with Claude's help than by taking a course. Use Claude to get a crash course on any topic instantly — "teach me playlist pitching strategy as if I'm a complete beginner" — then go execute. Save courses for when you need structured depth, not surface coverage.
+    </div>
+  </div>
+
+<script>
+  var TAB_IDS = ['releases','goals','revenue','weekly','aistack','resources'];
+
+  function switchTab(tab, btn) {
+    // Hide all non-curriculum tabs
+    TAB_IDS.forEach(function(id) {
+      var el = document.getElementById('tab-' + id);
+      if (el) el.style.display = 'none';
+    });
+
+    // Show/hide curriculum (uses display:contents for grid layout)
+    var curr = document.getElementById('tab-curriculum');
+    if (tab === 'curriculum') {
+      if (curr) curr.style.display = 'contents';
+    } else {
+      if (curr) curr.style.display = 'none';
+      var target = document.getElementById('tab-' + tab);
+      if (target) target.style.display = 'block';
+    }
+
+    // Update button states
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    if (btn) btn.classList.add('active');
+  }
+
+  function switchPhase(num) {
+    document.querySelectorAll('.phase-content').forEach(function(p) {
+      p.style.display = 'none';
+    });
+    document.querySelectorAll('.phase-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    var ph = document.getElementById('phase-' + num);
+    if (ph) ph.style.display = 'block';
+    var btns = document.querySelectorAll('.phase-btn');
+    if (btns[num - 1]) btns[num - 1].classList.add('active');
+  }
+
+  function toggleCard(card) {
+    card.classList.toggle('expanded');
+  }
+
+  // Animate stats on load
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.stat-num').forEach(function(el, i) {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(10px)';
+      el.style.transition = 'all 0.4s ease';
+      setTimeout(function() {
+        el.style.opacity = 1;
+        el.style.transform = 'translateY(0)';
+      }, i * 100 + 200);
+    });
+
+    // Register inline service worker for PWA offline caching
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        const CACHE = 'rokki-os-v1';
+        self.addEventListener('install', e => {
+          e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', './index.html'])));
+          self.skipWaiting();
+        });
+        self.addEventListener('activate', e => {
+          e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))));
+          self.clients.claim();
+        });
+        self.addEventListener('fetch', e => {
+          e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./'))));
+        });
+      `;
+      const swBlob = new Blob([swCode], {type: 'application/javascript'});
+      navigator.serviceWorker.register(URL.createObjectURL(swBlob))
+        .catch(function() {}); // Silently fail if blob SW not supported
+    }
+  });
+</script>
+
+</body>
+</html>
